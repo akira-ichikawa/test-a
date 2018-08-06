@@ -4,7 +4,9 @@ namespace App\Http\Controllers;
 
 use BotMan\BotMan\BotMan;
 use Illuminate\Http\Request;
-use App\Conversations\ExampleConversation;
+use App\Conversations\MotoConversation;
+use App\Conversations\HukuseiConversation;
+use App\Conversations\E2jConversation;
 
 class BotManController extends Controller
 {
@@ -30,8 +32,18 @@ class BotManController extends Controller
      * Loaded through routes/botman.php
      * @param  BotMan $bot
      */
-    public function startConversation(BotMan $bot)
+    public function motoConversation(BotMan $bot)
     {
-        $bot->startConversation(new ExampleConversation());
+        $bot->motomotoConversation(new MotoConversation());
+    }
+    
+    public function hukuseiConversation(BotMan $bot)
+    {
+        $bot->hukuhukuConversation(new HukuseiConversation());
+    }
+    
+    public function e2jConversation(BotMan $bot)
+    {
+        $bot->e2jConversation(new E2jConversation());
     }
 }

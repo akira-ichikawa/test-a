@@ -8,19 +8,20 @@ use BotMan\BotMan\Messages\Outgoing\Question;
 use BotMan\BotMan\Messages\Outgoing\Actions\Button;
 use BotMan\BotMan\Messages\Conversations\Conversation;
 
-class ExampleConversation extends Conversation
+class HukuseiConversation extends Conversation
 {
     /**
      * First question
      */
-    public function askReason()
+    public function hukuReason()
+    
     {
-        $question = Question::create("Huh - you woke me up. What do you need?")
-            ->fallback('Unable to ask question')
-            ->callbackId('ask_reason')
+        $question = Question::create("どした")
+            ->fallback('Unable to ask question')  // 
+            ->callbackId('ask_reason')  //
             ->addButtons([
-                Button::create('Tell a joke')->value('joke'),
-                Button::create('Give me a fancy quote')->value('quote'),
+                Button::create('英語で冗談を言って')->value('joke'),
+                Button::create('英語で名言を言って')->value('quote'),
             ]);
 
         return $this->ask($question, function (Answer $answer) {
@@ -40,6 +41,6 @@ class ExampleConversation extends Conversation
      */
     public function run()
     {
-        $this->askReason();
+        $this->hukuReason();
     }
 }
