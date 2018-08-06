@@ -6,7 +6,7 @@ use BotMan\BotMan\BotMan;
 use Illuminate\Http\Request;
 use App\Conversations\MotoConversation;
 use App\Conversations\HukuseiConversation;
-use App\Conversations\E2jConversation;
+use App\Conversations\ExampleConversation;
 
 class BotManController extends Controller
 {
@@ -42,8 +42,8 @@ class BotManController extends Controller
         $bot->hukuhukuConversation(new HukuseiConversation());
     }
     
-    public function e2jConversation(BotMan $bot)
+    public function startConversation(BotMan $bot)
     {
-        $bot->e2jConversation(new E2jConversation());
+        $bot->startConversation(new ExampleConversation());
     }
 }
