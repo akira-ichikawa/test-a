@@ -16,7 +16,7 @@ $botman->hears('help', BotManController::class.'@motoConversation');
 
 $botman->hears('he', BotManController::class.'@hukuseiConversation');
 
-$botman->hears('tr', BotManController::class.'@e2jConversation');
+//$botman->hears('tr', BotManController::class.'@e2jConversation');
 
 $botman->hears('', BotManController::class.'@e2jConversation');
 
