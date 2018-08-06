@@ -9,89 +9,52 @@ use BotMan\BotMan\Messages\Outgoing\Actions\Button;
 use BotMan\BotMan\Messages\Conversations\Conversation;
 
 class E2jConversation extends Conversation
+{
+   /**
+    * First question
+    */
+   public function askLanguage()
+   {
+       $this->ask('Hello! What is your language?', function(Answer $answer) {
+           // Save result
 
+           $this->language = $answer->getText();
+           
 
-//{
-    /**
-     * First question
-      */
-   public function e2j() {
-//      $this->reply('Hello');
-//        $japanese = "";
-//        $english = "";
-        $this->ask('Input English', function($answer, $bot) {
-        $bot->say('here you are'.$answer->getText());
-        }); 
-};
+     $url = 'https://api.cognitive.microsoft.com/sts/v1.0/issueToken';
+     $header = array(
+           "Content-Type: application/x-www-form-urlencoed", //ファイルの種類
+           "Accept: application/jwt",
+           "Content-Length: 0",
+           'Ocp-Apim-Subscription-Key: 5dfa2fc3bdad421f9e8745a242d55075'//Microsoft Translator Text APIキー
+           ); //キー隠す
 
-/*
-        $botman->hears('tr', function($bot) {
-    $bot->reply('Hello!');
-    $bot->ask('Whats your name?', function($answer, $bot) {
-        $bot->say('Welcome '.$answer->getText());
-    });
-});
+       $context = array(
+           "http" => array(
+           "method" => "POST",
+           "header" => implode("\r\n", $header)
+        ));
+
+       $token = file_get_contents($url, false, stream_context_create($context));//アクセストークンを取得
+       
+       $key = "Bearer%20". $token;
+       $text = $this->language;
+       $url = "https://api.microsofttranslator.com/v2/http.svc/Translate";
+       $data = "?appid=".$key."&text=".$text."&to=ja";
+       $this->language = file_get_contents($url.$data);
+       $this->language = preg_replace('/<("[^"]*"|\'[^\']*\'|[^\'">])*>/','',$this->language);//タグの除去を正規表現により行う
+   
+       
+       
+    //   $this->say($answer->getText);
+           $this->say($this->language);
+
+       });
+   }
+
+   public function run()
+   {
+       // This will be called immediately
+       $this->askLanguage();
+   }
 }
-*/
-
-//}
-//}
-        
-/*        
-        {
-            if(isset($_POST["english"]))
-            {
-                $english = $_POST["english"];
-                $url = 'https://api.cognitive.microsoft.com/sts/v1.0/issueToken';
-                $header = array(
-                        "Content-Type: application/x-www-form-urlencoded",
-                        "Accept: application/jwt",
-                        "Content-Length: 0",
-                        'Ocp-Apim-Subscription-Key: de18ea8a152146e49716628216fbf67d'//Microsoft AzureのTranslator Text APIにて取得したキーを入力してください。Microsoftに月額を払わずに運営したい場合、月に最大200万文字だけ翻訳することができます。（2017年7月時点）
-                        );
-             
-                $context = array(
-                    "http" => array(
-                    "method" => "POST",
-                    "header" => implode("\r\n", $header)
-                   ));
-             
-                $token = file_get_contents($url, false, stream_context_create($context));//アクセストークンを取得します。１０分間のみ有効です。
-             //file_get_tokenがURL
-                $key = "Bearer%20". $token;
-                $text = $_POST["english"];
-                $url = "https://api.microsofttranslator.com/v2/http.svc/Translate";
-                $data = "?appid=".$key."&text=".$text."&to=ja";
-                $japanese = file_get_contents($url.$data);//翻訳を実行します。   //
-                $japanese = preg_replace('/<("[^"]*"|\'[^\']*\'|[^\'">])*>/','',$japanese);//タグの除去を正規表現により行います。
-            };
-        
-        $this->say($japanese);
-    });
-    }
-*/    
-    
-
-/*
-<form action="" method="post">
-            <p>英語を入力してください。</p>
-            <textarea name="english" rows="5" cols="50"><?php echo $english; ?></textarea>
-            <p>翻訳結果</p>
-            <textarea rows="5" cols="50"><?php echo $japanese; ?></textarea>
-            <input type="submit" value="翻訳">
-        </form>
-*/
-        
-
-    /**
-     * Start the conversation
-     */
-/*     
-    public function run()
-    {
-        $this->e2j();
-    }
-}
-*/
-
-?>
