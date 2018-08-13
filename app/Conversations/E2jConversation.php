@@ -15,7 +15,7 @@ class E2jConversation extends Conversation
     */
    public function askLanguage()
    {
-       $this->ask('Hello! What is your language?', function(Answer $answer) {
+       $this->ask('Hello! input English?', function(Answer $answer) {
            // Save result
 
            $this->language = $answer->getText();
@@ -40,7 +40,7 @@ class E2jConversation extends Conversation
        $key = "Bearer%20". $token;
        $text = $this->language;
        $url = "https://api.microsofttranslator.com/v2/http.svc/Translate";
-       $data = "?appid=".$key."&text=".$text."&to=ja";
+       $data = "?appid=".$key."&text=".$text."&to=en";
        $this->language = file_get_contents($url.$data);
        $this->language = preg_replace('/<("[^"]*"|\'[^\']*\'|[^\'">])*>/','',$this->language);//タグの除去を正規表現により行う
    

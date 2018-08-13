@@ -15,18 +15,21 @@ class ExampleConversation extends Conversation
     */
    public function askLanguage()
    {
-       $this->ask('Hello! What is your language?', function(Answer $answer) {
+       $this->ask('Hello! Please English.', function(Answer $answer) {
            // Save result
 
            $this->language = $answer->getText();
            
-
+    
      $url = 'https://api.cognitive.microsoft.com/sts/v1.0/issueToken';
+  //   $dotenv = new Dotenv\Dotenv(__DIR__);
+//     $dotenv->load();
+  //   $api_key = getenv('API_KEY');
      $header = array(
            "Content-Type: application/x-www-form-urlencoed", //ファイルの種類
            "Accept: application/jwt",
            "Content-Length: 0",
-           'Ocp-Apim-Subscription-Key: 5dfa2fc3bdad421f9e8745a242d55075'//Microsoft Translator Text APIキー
+           'puts ENV["APP_KEY"]　＃=> "5dfa2fc3bdad421f9e8745a242d55075"'//Microsoft Translator Text APIキー
            ); //キー隠す
 
        $context = array(
