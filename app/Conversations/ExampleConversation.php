@@ -32,7 +32,7 @@ class ExampleConversation extends Conversation
            "Accept: application/jwt",
            "Content-Length: 0",
            'Ocp-Apim-Subscription-Key: puts ENV["API_KEY"]'
-//           'Ocp-Apim-Subscription-Key: 5dfa2fc3bdad421f9e8745a242d55075'//Microsoft Translator Text APIキー
+//           'Ocp-Apim-Subscription-Key: '//Microsoft Translator Text APIキー
            ); //キー隠す
 
        $context = array(
