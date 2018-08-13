@@ -31,7 +31,7 @@ class ExampleConversation extends Conversation
            "Content-Type: application/x-www-form-urlencoed", //ファイルの種類
            "Accept: application/jwt",
            "Content-Length: 0",
-           'Ocp-Apim-Subscription-Key: puts ENV["API_KEY"]'
+           'Ocp-Apim-Subscription-Key: put ENV["API_KEY"]'
 //           'Ocp-Apim-Subscription-Key: '//Microsoft Translator Text APIキー
            ); //キー隠す
 
