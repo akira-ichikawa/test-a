@@ -4,8 +4,14 @@ use App\Http\Controllers\BotManController;
 
 $botman = resolve('botman');
 
+//$botman->hears('Hi', function ($bot) {
+//    $bot->reply('Hello!');
+//});  
+
 $botman->hears('Hi', function ($bot) {
-    $bot->reply('Hello!');
+   $reply2 = getenv('HENJI');
+    $bot->reply($reply2
+        );
 });  
     
     $botman->hears('Hello', function ($bot) {
@@ -23,7 +29,7 @@ $botman->hears('Hi', function ($bot) {
 // ここに言語認識API
     
      $url = 'https://api.cognitive.microsoft.com/sts/v1.0/issueToken';
-     $key = getenv["API_KEY"];
+     $key = getenv('API_KEY');
      $header = array(
            "Content-Type: application/x-www-form-urlencoed", //ファイルの種類
            "Accept: application/jwt",
