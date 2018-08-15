@@ -23,12 +23,14 @@ $botman->hears('Hi', function ($bot) {
 // ここに言語認識API
     
      $url = 'https://api.cognitive.microsoft.com/sts/v1.0/issueToken';
+     $key = getenv["API_KEY"];
      $header = array(
            "Content-Type: application/x-www-form-urlencoed", //ファイルの種類
            "Accept: application/jwt",
            "Content-Length: 0",
 //         'Ocp-Apim-Subscription-Key: de18ea8a152146e49716628216fbf67d'
-         'Ocp-Apim-Subscription-Key: put ENV["API_KEY"]'
+           "Ocp-Apim-Subscription-Key: $key"
+         
 //         put ENV["API_KEY"]'
            ); //キー隠す
      $context = array(
